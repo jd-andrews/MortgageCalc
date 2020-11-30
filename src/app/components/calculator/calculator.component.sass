@@ -1,0 +1,219 @@
+// $test-border: 5px solid black
+$main-color: #e1eeee
+$inverse-gradient: linear-gradient(145deg, #cbd6d6, #f1ffff)
+$holder-shadow: -30px 30px 60px #c0cacd, 30px -30px 60px #ffffff
+
+@mixin center-center
+    justify-content: center
+    align-items: center
+@mixin input-style
+    box-shadow: 3px 3px 7px #bfcaca, -3px -3px 7px #ffffff
+    border: 2px solid #fa8619af
+    border-radius: 5px
+
+a
+    text-decoration: none
+    color: black
+
+.logo
+    height: 70px
+    width: auto
+
+#big
+    position: absolute
+    height: 100vh
+    width: 100vw
+    z-index: 99
+
+#about
+    position: absolute
+    height: 60vh
+    width: 80vw
+    z-index: 100
+    display: flex
+    flex-direction: column
+    background-color: #ffffff
+    box-shadow: $holder-shadow
+    border-radius: 50px
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    opacity: .98
+    padding: 20px
+    font-size: 1.2em
+    @include center-center
+    a, p
+        padding: 15px
+    img
+        height: 40px
+        width: 40px
+    .logo
+        height: 70px
+        width: auto
+    #X
+        font-style: none
+        font-size: 1.5em
+        cursor: pointer
+        position: fixed
+        top: 20px
+        left: 20px
+        &:hover
+            color: #fa8619af
+
+main, .input
+    display: flex
+    flex-direction: column
+    font-size: 1.2em
+
+form
+    display: flex
+    flex-direction: column
+
+    width: 100vw
+    align-items: center
+    justify-content: space-around
+    padding: 120px 0 120px 0
+main
+    justify-content: space-evenly
+    align-items: center
+    width: 100vw
+    height: 100%
+    background-color: $main-color
+
+#divide
+    height: 100px
+    width: 10px
+    z-index: 0
+.holder
+    height: 400px
+    padding: 30px
+    width: 70vw
+    border-radius: 50px
+    background: linear-gradient(225deg, $main-color, #cbd6d9)
+    box-shadow: $holder-shadow
+
+.one
+    .input
+        padding: 5px
+    label
+        font-weight: bold
+        z-index: 4
+
+.two
+    div, p
+        padding: 5px
+    div
+        display: flex
+        justify-content: space-between
+        align-items: center
+    input
+        height: 100%
+        width: 75px
+        @include input-style
+
+.fas
+    color: #fa8619af
+
+.fas:hover
+    cursor: pointer
+    color: #ffffff
+
+header, footer
+    height: 50px
+    width: 100vw
+    display: flex
+    justify-content: center
+
+input
+    height: 1.2em
+    font-size: 1em
+    width: 80%
+    border: 0
+    background: $inverse-gradient
+
+select
+    height: 35px
+    font-size: .8em
+    width: 100%
+    cursor: pointer
+    background: $inverse-gradient
+    @include input-style
+
+#home
+    padding-left: 20px
+
+#dpnum
+    padding-left: 20px
+
+#interest
+    padding: 0 15px 0 5px
+
+#base, #premium
+
+    font-size: 1.5em
+    font-weight: 900
+
+.dollar, .percent
+    background: $inverse-gradient
+    @include input-style
+
+#EMP
+    font-size: .8em
+
+header
+    top: 20px
+    position: absolute
+
+footer
+    bottom: 10px
+    position: fixed
+    div
+        display: flex
+        padding: 10px
+        border-radius: 15px
+        background-color: #cbd6d6
+        @include center-center
+    p
+        cursor: pointer
+img
+    height: 50px
+    width: 50px
+
+#line
+    height: 5px
+    background-color: #014c67
+    width: 100%
+    padding: 0
+
+.modal
+    padding: 5px
+    border-radius: 5px
+    z-index: 100
+    border: 2px solid  #014c67
+    background-color: $main-color
+    position: absolute
+    p
+        font-size: .5em
+@media only screen and (min-width: 500px)
+    main
+        flex-direction: row
+        height: 100%
+    .holder
+        width: 33vw
+
+    form
+        flex-direction: row
+
+    #divide
+        width: 0
+
+@media only screen and (min-width: 768px)
+
+    #about
+        height: 50vh
+        width: 50vw
+    .logo
+        height: 120px
+
+    main
+        height: 100vh

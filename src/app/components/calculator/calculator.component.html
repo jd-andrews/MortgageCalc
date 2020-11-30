@@ -1,0 +1,230 @@
+<header>
+  <a href="" title="Thatsa Mortgage Logo"
+    ><img
+      class="logo"
+      src="../assets/thatsa_mortgage.png"
+      alt="Thatsa Mortgage Logo"
+  /></a>
+</header>
+<section id="big" *ngIf="clickOut === true" (click)="modalsOff()"></section>
+<section id="about" *ngIf="modals[4]">
+  <a href="" title="Thatsa Mortgage Logo"
+    ><img
+      class="logo"
+      src="../assets/thatsa_mortgage.png"
+      alt="Thatsa Mortgage Logo"
+  /></a>
+  <p id="X" (click)="modalsOff()">X</p>
+  <p>
+    A simple mortgage calculator made by me - JD Andrews. It has places to put
+    pretty much everything you need to make an accurate estimation on what you
+    might pay. If you have any questions, concerns or want to say nice work,
+    feel free to reach out through one of the links below.
+  </p>
+  <div>
+    <a
+      href="https://www.jonathandandrews.com/"
+      alt="www.jda.photos - my website"
+      title="www.jda.photos - my website"
+      ><img src="../assets/logo.png"
+    /></a>
+    <a
+      href="https://www.linkedin.com/in/jdandrews11/"
+      alt="/jdandrews11 - linkedin"
+      title="/jdandrews11 on linkedin"
+      ><img src="../assets/linkedin-square-logo.png"
+    /></a>
+    <a
+      href="https://www.instagram.com/jda.photos/?hl=en"
+      alt="jda.photos - instagram"
+      title="jda.photos on instagram"
+      ><img src="../assets/ig.png" /></a
+    ><a
+      href="https://github.com/jd-andrews"
+      alt="jd-andrews - github"
+      title="jd-andrews on github"
+      ><img src="../assets/GitHub-Mark-120px-plus.png"
+    /></a>
+  </div>
+</section>
+<main>
+  <form #mortgage="ngForm" (ngSubmit)="testSubmit(mortgage.value)">
+    <div class="holder one">
+      <h2>Your Home Data</h2>
+      <div id="line"></div>
+      <div class="input">
+        <label for="homeprice"
+          >Home Price <i class="fas fa-info-circle" (click)="modalOn(0)"></i
+        ></label>
+        <div *ngIf="modals[0] === true" class="modal">
+          <p>
+            Referring to the price of your current or future home.
+          </p>
+        </div>
+        <div class="dollar">
+          $
+          <input
+            (keyup)="testSubmit(mortgage.value)"
+            id="home"
+            name="home"
+            title="Enter home price here."
+            placeholder="ex. 200000"
+            [(ngModel)]="mortgageTotal.home"
+            required
+          />
+          <!-- <i class="dollar">$</i> -->
+        </div>
+      </div>
+      <div class="input">
+        <label for="dpnum"
+          >Down Payment <i class="fas fa-info-circle" (click)="modalOn(1)"></i
+        ></label>
+        <div *ngIf="modals[1] === true" class="modal">
+          <p>
+            This is the down payment you paid (or plan to pay).
+          </p>
+          <p>
+            If it's a percentage then take that percentage out of your total
+            price.
+          </p>
+        </div>
+        <div id="dphold" class="dollar">
+          $
+          <input
+            (keyup)="testSubmit(mortgage.value)"
+            id="dpnum"
+            name="dpnum"
+            title="Down Payment Amount"
+            placeholder="ex. 20000"
+            [(ngModel)]="mortgageTotal.dpnum"
+            ngModel
+            required
+          />
+        </div>
+      </div>
+      <div class="input">
+        <label for="loantype"
+          >Length of Loan <i class="fas fa-info-circle" (click)="modalOn(2)"></i
+        ></label>
+        <div *ngIf="modals[2] === true" class="modal">
+          <p>
+            Referring to the length of your loan in years.
+          </p>
+        </div>
+        <select
+          class="custom-select"
+          [(ngModel)]="mortgageTotal.loantype"
+          name="loantype"
+          (mouseleave)="testSubmit(mortgage.value)"
+        >
+          <option value="" disabled>Please Select One</option>
+          <option value="10">10 Years</option>
+          <option value="15">15 Years</option>
+          <option value="20">20 Years</option>
+          <option value="30">30 Years</option>
+        </select>
+        <!-- <p class="arrow">&#9661;</p> -->
+      </div>
+      <div class="input">
+        <label for="interest"
+          >Interest <i class="fas fa-info-circle" (click)="modalOn(3)"></i
+        ></label>
+        <div *ngIf="modals[3] === true" class="modal">
+          <p>
+            Referring to your interest rate, or APR (Annual Percentage Rate).
+          </p>
+        </div>
+        <div class="percent">
+          <input
+            (keyup)="testSubmit(mortgage.value)"
+            id="interest"
+            name="interest"
+            title="Interest Rate"
+            placeholder="ex. 3.29"
+            [(ngModel)]="mortgageTotal.interest"
+            required
+          />%
+        </div>
+      </div>
+    </div>
+    <div id="divide"></div>
+    <div class="holder two">
+      <h2>Your Monthly Rates</h2>
+      <div id="line"></div>
+      <div>
+        <p id="EMP">Estimated Monthly Payment (base)</p>
+        <p id="base">${{ monthlyPayment }}</p>
+      </div>
+      <div>
+        <p>
+          Homeowners Insurance
+        </p>
+        <div>
+          <p>+</p>
+          <input
+            id="homeowners"
+            name="homeowners"
+            type="number"
+            title="homeowners insurance amount"
+            [(ngModel)]="mortgageTotal.homeowners"
+            required
+            placeholder="ex. 200"
+          />
+        </div>
+      </div>
+      <div>
+        <p>Property Tax</p>
+        <div>
+          <p>+</p>
+          <input
+            id="property"
+            name="property"
+            type="number"
+            title="Property Tax"
+            [(ngModel)]="mortgageTotal.property"
+            required
+            placeholder="ex. 200"
+          />
+        </div>
+      </div>
+
+      <div>
+        <p>HOA Fees</p>
+        <div>
+          <p>+</p>
+          <input
+            id="HOA"
+            name="HOA"
+            type="number"
+            title="HOA Fees"
+            [(ngModel)]="mortgageTotal.HOA"
+            required
+            placeholder="ex. 200"
+          />
+        </div>
+      </div>
+      <div>
+        <p>Total Monthy Payment</p>
+        <p id="premium">
+          ${{
+            monthlyPayment +
+              mortgageTotal.homeowners +
+              mortgageTotal.property +
+              mortgageTotal.HOA
+          }}
+        </p>
+      </div>
+    </div>
+  </form>
+</main>
+<footer>
+  <!-- <img title="Instagram" src="../assets/ig.png" alt="Instagram" /> -->
+  <div>
+    <p (click)="modalOn(4)">About</p>
+    |
+    <a
+      href="https://www.bankrate.com/calculators/mortgages/mortgage-calculator.aspx"
+      >Resources</a
+    >
+  </div>
+</footer>
